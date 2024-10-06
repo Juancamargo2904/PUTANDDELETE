@@ -1,0 +1,62 @@
+<div class="container mt-5">
+  <h2 class="text-center">Lista de Usuarios</h2>
+  <ul class="list-group">
+    <li *ngFor="let usuario of usuarios" class="list-group-item">
+      <strong>{{ usuario.nombre }}</strong> - {{ usuario.email }} - Empresa: {{ usuario.empresa }}
+    </li>
+  </ul>
+
+  <h2 class="mt-4">Agregar Usuario</h2>
+  <form (ngSubmit)="agregarUsuario()">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" [(ngModel)]="nuevoUsuario.nombre" name="nombre" class="form-control" id="nombre" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" [(ngModel)]="nuevoUsuario.email" name="email" class="form-control" id="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="empresa" class="form-label">Empresa</label>
+      <input type="text" [(ngModel)]="nuevoUsuario.empresa" name="empresa" class="form-control" id="empresa" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+  </form>
+
+  <!-- Formulario para editar un usuario por ID -->
+  <h2 class="mt-4">Editar Usuario por ID</h2>
+  <form (ngSubmit)="cargarUsuarioParaEditar()">
+    <div class="mb-3">
+      <label for="idEditar" class="form-label">ID del Usuario</label>
+      <input type="number" [(ngModel)]="idUsuarioEditar" name="idEditar" class="form-control" id="idEditar" required>
+    </div>
+    <button type="submit" class="btn btn-info">Cargar Usuario</button>
+  </form>
+
+  <!-- Si hay un usuario seleccionado, mostrar el formulario de edición -->
+  <form *ngIf="usuarioSeleccionado.nombre" (ngSubmit)="editarUsuario()">
+    <div class="mb-3">
+      <label for="nombreEditar" class="form-label">Nombre</label>
+      <input type="text" [(ngModel)]="usuarioSeleccionado.nombre" name="nombreEditar" class="form-control" id="nombreEditar" required>
+    </div>
+    <div class="mb-3">
+      <label for="emailEditar" class="form-label">Email</label>
+      <input type="email" [(ngModel)]="usuarioSeleccionado.email" name="emailEditar" class="form-control" id="emailEditar" required>
+    </div>
+    <div class="mb-3">
+      <label for="empresaEditar" class="form-label">Empresa</label>
+      <input type="text" [(ngModel)]="usuarioSeleccionado.empresa" name="empresaEditar" class="form-control" id="empresaEditar" required>
+    </div>
+    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+  </form>
+
+  <!-- Formulario para eliminar un usuario por ID -->
+  <h2 class="mt-4">Eliminar Usuario por ID</h2>
+  <form (ngSubmit)="eliminarUsuario()">
+    <div class="mb-3">
+      <label for="idEliminar" class="form-label">ID del Usuario</label>
+      <input type="number" [(ngModel)]="idUsuarioEliminar" name="idEliminar" class="form-control" id="idEliminar" required>
+    </div>
+    <button type="submit" class="btn btn-danger">Eliminar Usuario</button>
+  </form>
+</div>
